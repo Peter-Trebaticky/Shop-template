@@ -1,16 +1,13 @@
-(() => {
+( () => {
   "use strict";
 
   const productsEl = document.querySelector(".products");
 
-  try {
-    const response = fetch("https://dummyjson.com/products");
-    const { products } = response.json();
-    
-    generateProductList(products);
-  } catch (error) {
-    console.error("API Error:", error);
-  }
+  fetch("https://dummyjson.com/products")
+    .then(response => response.json())
+    .then(data => generateProductList(data.products))
+    .catch(error => console.error("API Error:", error));
+
   //template
   function generateProductList(products) {
     products.forEach(item => {
